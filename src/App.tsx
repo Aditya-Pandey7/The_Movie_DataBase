@@ -1,7 +1,7 @@
 import "./App.css";
 
 function App() {
-  return <>the movie database</>;
+  return <>the movie database with some changes</>;
 }
 
 export default App;
