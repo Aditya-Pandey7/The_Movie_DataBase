@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className="w-full bg-[var(--primary-color)]  p-4">
       <div className="width-stack flex justify-between">
-        <div className="submedia flex">
+        <nav className="submedia flex">
           <img
             src={logo}
             alt="TMDB Logo"
@@ -12,30 +12,26 @@ function Header() {
             height={20}
             className="mr-4"
           />
-          <ul className="text-white flex gap-8 font-bold px-4 py-2 cursor-pointer">
+          <ul className="text-white flex gap-8 font-bold px-4 py-2 [&_li]:cursor-pointer">
             <li>Movies</li>
             <li>Tv Shows</li>
             <li>People</li>
             <li>More</li>
           </ul>
-        </div>
-        <div className="icons">
-          <ul className="text-white flex gap-8 font-bold px-4 py-2 cursor-pointer ">
+        </nav>
+        <nav className="icons">
+          <ul className="text-white flex gap-8 font-bold px-4 py-2 [&_li]:cursor-pointer ">
             <li>
-              <Plus
-                size={"22px"}
-                className="font-extrabold"
-                strokeWidth={"4px"}
-              />
+              <Plus size={22} className="font-extrabold" strokeWidth={4} />
             </li>
-            <li className="capitalize border px-1">en</li>
+            <li className="capitalize rounded-xs border px-1">en</li>
             <li>Login</li>
             <li>Join TMDB</li>
             <li>
-              <Search className="" color="skyblue" strokeWidth={"4px"} />
+              <Search color="skyblue" strokeWidth={4} />
             </li>
           </ul>
-        </div>
+        </nav>
       </div>
     </header>
   );
