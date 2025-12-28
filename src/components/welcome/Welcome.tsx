@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import Search from "./components/Search";
 
 function Welcome() {
@@ -25,4 +25,4 @@ function Welcome() {
   );
 }
 
-export default Welcome;
+export default memo(Welcome);
