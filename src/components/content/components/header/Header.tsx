@@ -1,10 +1,6 @@
-import { useState } from "react";
 import type { IHeader } from "../../type";
 
-function Header({ title, selector }: IHeader) {
-  const [type, setType] = useState(selector[0]);
-  console.log(type);
-
+function Header({ title, selector, value, onChange }: IHeader) {
   return (
     <div className="flex">
       <h2 className="mr-5 font-semibold text-2xl">{title}</h2>
@@ -12,12 +8,14 @@ function Header({ title, selector }: IHeader) {
         {selector.map((item, index) => (
           <div
             key={index}
-            onClick={() => setType(item)}
+            onClick={() => onChange(item.value)}
             className={`px-4 py-1 rounded-full cursor-pointer font-semibold transition duration-100 ${
-              type === item ? "bg-[var(--primary-color)] text-white " : " "
+              value === item.value
+                ? "bg-[var(--primary-color)] text-white "
+                : " "
             }`}
           >
-            {item}
+            {item.label}
           </div>
         ))}
       </div>
