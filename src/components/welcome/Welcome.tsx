@@ -6,7 +6,7 @@ function Welcome() {
   console.log(searchInput);
   return (
     <section
-      className="h-96"
+      className="h-96 bg-gray-500"
       style={{
         backgroundImage:
           'url("https://media.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/7CJyBEcU7qzhbj1WTlxGPda2Lpb.jpg")',

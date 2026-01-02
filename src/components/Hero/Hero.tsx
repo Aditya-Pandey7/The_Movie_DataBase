@@ -2,6 +2,7 @@ import { useState } from "react";
 import Content from "../content/Content";
 import Welcome from "../welcome/Welcome";
 import { useFetchFreeToWatch, useFetchTrending } from "@/hooks/hooks";
+import Searchbar from "./components/searchbar/Searchbar";
 
 function Hero() {
   const [time, setTime] = useState("day");
@@ -10,6 +11,7 @@ function Hero() {
   const { data: panelData } = useFetchFreeToWatch(freeToWatchType);
   return (
     <section>
+      <Searchbar />
       <Welcome />
       <Content
         value={time}
