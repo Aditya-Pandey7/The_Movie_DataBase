@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchFromTMDB } from "../api/confige";
 import type { IMovie, IScroller, ITmdbResponse } from "@/types/types";
+import type { ITvDetails } from "@/pages/detailedpage/type";
 
 export const useFetchMovie = () => {
   return useQuery<ITmdbResponse<IMovie>>({
@@ -31,5 +32,13 @@ export const useFetchSearchResults = (query: string) => {
     queryKey: ["searchResults", query],
     queryFn: (): Promise<ITmdbResponse<IScroller>> =>
       fetchFromTMDB("/search/multi", { language: "en-US", query, page: 1 }),
+  });
+};
+
+export const useFetchDetails = (type: string, id: string) => {
+  return useQuery<ITvDetails>({
+    queryKey: ["details", type, id],
+    queryFn: (): Promise<ITvDetails> =>
+      fetchFromTMDB(`/${type}/${id}`, { language: "en-US" }),
   });
 };
