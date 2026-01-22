@@ -14,32 +14,63 @@ function Scroller<T extends IScroller>({
   if (isLoading) {
     return <ScrollerSkeleton />;
   }
+  const computeValue = (vote: number | undefined) => {
+    const v = Math.ceil((vote as number) * 10) || 0;
+    return v;
+  };
+
+  const getColor = (vote: number | undefined) => {
+    const value = computeValue(vote);
+    if (value > 0 && value < 30) return "red";
+    if (value >= 30 && value < 70) return "yellow";
+    return "green";
+  };
 
   return (
     <div className="flex flex-nowrap overflow-x-auto w-full gap-4 py-4  my-5">
-      {data?.map((item, index) => (
-        <div key={index} className="">
-          <Link to={`/details/${item.media_type}/${item.id}`}>
-            <div className="min-w-37.5 h-56.25 rounded-md overflow-hidden">
-              <img
-                src={getTmdbImage(item.poster_path, "w780")}
-                alt=""
-                className="h-full w-full "
-              />
-            </div>
-          </Link>
-          <div className="my-2 mt-6">
+      {data?.map((item, index) => {
+        const value = computeValue(item.vote_average);
+        const color = getColor(item.vote_average);
+        return (
+          <div key={index} className="">
             <Link to={`/details/${item.media_type}/${item.id}`}>
-              <h3 className="text-[1rem] font-bold mt-2 hover:text-blue-400 hover:underline ">
-                {item.title || item.name}
-              </h3>
+              <div className="min-w-37.5 h-56.25 rounded-md overflow-hidden">
+                <img
+                  src={getTmdbImage(item.poster_path, "w780")}
+                  alt={item.title || item.name}
+                  className="h-full w-full "
+                />
+              </div>
+              <div className=" text-white primary-bg size-15 rounded-full   p-1  relative -mt-9 ml-3">
+                <div
+                  className={`border-4 h-full w-full rounded-full flex items-center justify-center
+                    ${color === "red" && "border-red-500"}
+                    ${color === "yellow" && "border-yellow-300"}
+                    ${color === "green" && "border-green-500"} `}
+                >
+                  <div className="text-sm">{value}</div>
+                  <span className="font-semibold text-[10px] mb-2">%</span>
+                </div>
+              </div>
             </Link>
-            <p className="text-[1rem] text-muted-foreground">
-              {format(new Date(item.release_date || item.first_air_date || new Date()), "PP")}
-            </p>
+            <div className="my-2 mt-6">
+              <Link to={`/details/${item.media_type}/${item.id}`}>
+                <h3 className="text-[1rem] font-bold mt-2 hover:text-blue-400 hover:underline ">
+                  {item.title || item.name}
+                </h3>
+              </Link>
+              <p className="text-[1rem] text-muted-foreground">
+                {format(
+                  new Date(
+                    item.release_date || item.first_air_date || new Date(),
+                  ),
+                  "PP",
+                )}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
