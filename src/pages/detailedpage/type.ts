@@ -97,7 +97,7 @@ export interface SpokenLanguage {
   name: string;
 }
 
-export interface IMoveieDetails {
+export interface IMovieDetails {
   adult: boolean;
   backdrop_path: string | null;
   belongs_to_collection: string | null;
@@ -110,7 +110,6 @@ export interface IMoveieDetails {
   original_title: string;
   overview: string;
   popularity: number;
-
   poster_path: string | null;
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
@@ -125,3 +124,6 @@ export interface IMoveieDetails {
   vote_average: number;
   vote_count: number;
 }
+
+// Union type for easier prop passing
+export type DetailedData = IMovieDetails | ITvDetails;

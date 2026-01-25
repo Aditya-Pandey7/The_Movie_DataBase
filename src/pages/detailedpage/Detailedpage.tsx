@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 
 import DetailedOverview from "./components/detailedOverview/DetailedOverview";
 import ContentWrapper from "./components/contentWrapper/ContentWrapper";
-import { useFetchDetails } from "@/hooks/hooks";
+import DetailedOverviewSkeleton from "./components/skeletons/detailedOverviewSkeleton";
+
+import { useFetchCredits, useFetchDetails } from "@/hooks/hooks";
 
 type RouteParams = {
   type: "tv" | "movie";
@@ -11,22 +13,24 @@ type RouteParams = {
 };
 
 function Detailedpage() {
-  const params = useParams<RouteParams>();
-
-  const { type, id } = params;
-
-  const {
-    data: detailedData,
-    isLoading,
-    isError,
-  } = useFetchDetails(type == "movie" ? "movie" : "tv", id!);
-  if (isLoading) return <div>Loading...</div>;
-  if (isError || !detailedData) return <div>Error loading data.</div>;
+  const { type, id } = useParams<RouteParams>();
+  const safeType = type === "movie" || type === "tv" ? type : "movie";
+  const { data: detailedData, isLoading } = useFetchDetails(safeType, id);
+  const credits = useFetchCredits(safeType, id);
 
   return (
     <div>
-      <DetailedOverview detailedData={detailedData} />
-      <ContentWrapper />
+      {isLoading ? (
+        <DetailedOverviewSkeleton />
+      ) : (
+        detailedData && (
+          <DetailedOverview type={safeType} detailedData={detailedData} />
+        )
+      )}
+
+      {detailedData && (
+        <ContentWrapper detailedData={detailedData} credits={credits} />
+      )}
     </div>
   );
 }
