@@ -2,9 +2,13 @@ const ScrollerSkeleton = () => {
   return (
     <div className="flex flex-nowrap overflow-x-auto w-full gap-4 py-4 my-5">
       {Array.from({ length: 9 }).map((_, index) => (
-        <div key={index} className="animate-pulse ">
-          {/* Image Skeleton */}
-          <div className="min-w-37.5 h-56.25 rounded-md bg-muted" />
+        <div key={index} className="animate-pulse">
+          {/* Image Placeholder */}
+          <img
+            src="https://placehold.net/400x400.png"
+            alt="No image available"
+            className="min-w-37.5 h-56.25 rounded-md object-cover"
+          />
 
           {/* Text Skeleton */}
           <div className="my-2 mt-6 space-y-2">
