@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { memo } from "react";
+import bgimage from "/public/images/joinToday.webp";
 
 const benefits = [
   "Enjoy TMDB ad free",
@@ -11,11 +12,12 @@ const benefits = [
 ];
 
 const JoinToday = () => {
-  const bgimage =
-    "https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces_filter(duotone,190235,ad47dd)/lMnoYqPIAVL0YaLP5YjRy7iwaYv.jpg";
   return (
     <section
-      className={`bg-[url('${bgimage}')]  bg-cover bg-center bg-no-repeat   `}
+      className={`  bg-cover bg-center bg-no-repeat   `}
+      style={{
+        backgroundImage: `url(${bgimage})`,
+      }}
     >
       <div className="width-stack-xy ">
         <div className="">

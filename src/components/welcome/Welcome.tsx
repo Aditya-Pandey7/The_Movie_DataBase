@@ -1,6 +1,6 @@
 import { memo, useState } from "react";
 import Search from "./components/Search";
-
+import welcomeImage from "/public/images/home.webp";
 function Welcome() {
   const [searchInput, setSearchInput] = useState("");
   console.log(searchInput);
@@ -8,8 +8,7 @@ function Welcome() {
     <section
       className="h-96 bg-gray-500"
       style={{
-        backgroundImage:
-          'url("https://media.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,00192f,00baff)/7CJyBEcU7qzhbj1WTlxGPda2Lpb.jpg")',
+        backgroundImage: `url(${welcomeImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
