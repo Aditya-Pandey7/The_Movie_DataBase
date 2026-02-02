@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from "react";
+import { memo, useMemo } from "react";
 import type { ICreditsResponse } from "./type";
 import { Link, useParams } from "react-router-dom";
 
