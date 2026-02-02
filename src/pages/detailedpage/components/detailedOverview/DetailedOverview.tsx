@@ -28,8 +28,20 @@ function DetailedOverview({ type, detailedData }: DetailedOverviewProps) {
     type === "movie"
       ? detailedData?.release_date
       : detailedData?.first_air_date;
+
+  const backgroundImage = getTmdbImage(
+    detailedData?.backdrop_path || detailedData?.poster_path || "",
+    "original",
+  );
   return (
-    <div className="py-10 bg-center bg-no-repeat bg-red-500">
+    <div
+      className="py-10 bg-center bg-no-repeat bg-gray-900/80 bg-blend-darken"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <section className="width-stack flex">
         {/* Poster */}
         <div>

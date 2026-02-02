@@ -1,6 +1,6 @@
 const DetailedOverviewSkeleton = () => {
   return (
-    <div className="py-10 bg-center bg-no-repeat bg-red-200">
+    <div className="py-10 bg-center bg-no-repeat bg-gray-900/80 bg-blend-darken">
       <section className="width-stack flex animate-pulse">
         {/* Poster Skeleton */}
         <div>
