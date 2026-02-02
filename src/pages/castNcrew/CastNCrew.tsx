@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import getTmdbImage from "@/utils/getTmdbImages";
 import { format } from "date-fns";
 import LoadingDialog from "@/components/loadingDialog/LoadingDialog";
+import type { IMovieDetails, ITvDetails } from "@/pages/detailedpage/type";
 
 function CastNCrew() {
   const { type, id } = useParams<{ type: "movie" | "tv"; id: string }>();
@@ -18,14 +19,18 @@ function CastNCrew() {
     id,
   );
 
-  const title = typeSafe === "movie" ? detailsData?.title : detailsData?.name;
-
-  const year =
+  const title =
     typeSafe === "movie"
-      ? format(new Date(detailsData?.release_date || ""), "yyyy")
-      : format(new Date(detailsData?.first_air_date || ""), "yyyy");
+      ? (detailsData as IMovieDetails)?.title
+      : (detailsData as ITvDetails)?.name;
 
-  console.log(data);
+  const releaseDate =
+    typeSafe === "movie"
+      ? (detailsData as IMovieDetails)?.release_date
+      : (detailsData as ITvDetails)?.first_air_date;
+
+  const year = releaseDate ? format(new Date(releaseDate), "yyyy") : "";
+
   if (isLoading || isDetailsLoading)
     return <LoadingDialog open={isLoading || isDetailsLoading} />;
   return (
