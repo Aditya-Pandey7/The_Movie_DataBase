@@ -1,73 +1,159 @@
-# React + TypeScript + Vite
+# 🎬 TMDB Explorer (The Movie Database)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **React + TypeScript** web app to explore **movies, TV shows, and people** using **The Movie Database (TMDB) API**. It features trending and free‑to‑watch discovery, rich detail pages, and dedicated cast & crew and person views — all powered by **React Query** caching for fast, smooth UX.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- **Trending & Free‑to‑Watch discovery** with quick toggles (time window & media type)
+- **Global search** across movies, TV shows, and people (multi‑type results)
+- **Detailed Movie/TV pages** with overview, metadata, and credit summaries
+- **Cast & Crew pages** with full role breakdowns
+- **Person profile pages** with biography and external IDs
+- **Optimized data fetching** using React Query caching and suspense‑friendly loading states
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧰 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React + TypeScript**
+- **Vite** — fast dev server & optimized builds
+- **React Router** — client‑side routing
+- **@tanstack/react-query** — API state management & caching
+- **Axios** — HTTP client
+- **Tailwind CSS** — utility‑first styling
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ✅ Requirements
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Node.js 18+** (recommended)
+- **TMDB API key**
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_TMDB_API_KEY=your_tmdb_api_key
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The API key is consumed by:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `src/api/axiosConfig.ts`
+- `src/api/config.ts`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+> ⚠️ Never commit your API key to a public repository.
+
+---
+
+## 🚀 Getting Started
+
+Install dependencies:
+
+```bash
+npm install
 ```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+Lint the codebase:
+
+```bash
+npm run lint
+```
+
+---
+
+## 🧭 Routing Overview
+
+Defined in `src/routes/index.tsx`:
+
+- `/` — Home (Hero)
+- `/details/:type/:id` — Movie / TV details
+- `/cast-crew/:type/:id` — Cast & crew list
+- `/person/:id` — Person details
+
+---
+
+## 🗂️ Project Structure
+
+```txt
+src/
+  api/               # Axios client & TMDB helpers
+  components/        # Reusable UI components
+  hooks/             # React Query hooks
+  pages/             # Page-level views (Home, Details, CastCrew, Person)
+  routes/            # Route configuration
+  types/             # Shared TypeScript types
+  utils/             # Helpers (image URLs, formatters, etc.)
+```
+
+---
+
+## 📡 Data Fetching
+
+All TMDB requests are routed through a centralized helper:
+
+- `fetchFromTMDB()`
+
+This function reads the **base URL** and **API key** from environment variables. React Query hooks (in `src/hooks`) wrap these calls to provide:
+
+- Request caching
+- Automatic refetching
+- Loading & error state handling
+
+---
+
+## 🧪 Notes on API Usage
+
+This project depends on TMDB data. When deploying publicly:
+
+- Ensure your API key has sufficient permissions
+- Follow TMDB branding & attribution guidelines
+
+---
+
+## 📦 Deployment
+
+Vite outputs static assets that can be deployed to:
+
+- Vercel
+- Netlify
+- GitHub Pages
+- Any static hosting provider
+
+Build the app:
+
+```bash
+npm run build
+```
+
+Then deploy the generated `dist/` folder.
+
+---
+
+## 📣 Credits
+
+Data provided by **The Movie Database (TMDB)**.
+
+> This product uses the TMDB API but is not endorsed or certified by TMDB.
