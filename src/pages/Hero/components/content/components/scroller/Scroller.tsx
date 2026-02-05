@@ -53,6 +53,7 @@ function Scroller<T extends IScroller>({
                   src={getTmdbImage(item.poster_path, "w780")}
                   alt={item.title || item.name}
                   className="h-full w-full "
+                  loading="lazy"
                 />
               </div>
               <div className=" text-white primary-bg size-15 rounded-full   p-1  relative -mt-9 ml-3">

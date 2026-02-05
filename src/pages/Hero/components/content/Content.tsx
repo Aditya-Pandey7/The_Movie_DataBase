@@ -1,8 +1,10 @@
+import { lazy, Suspense } from "react";
 import trendingBG from "../../../../../public/trending-bg.svg";
 import Header from "./components/header/Header";
-import Scroller from "./components/scroller/Scroller";
+const Scroller = lazy(() => import("./components/scroller/Scroller"));
 import type { IContentProps } from "./type";
 import type { IScroller } from "@/types/types";
+import ScrollerSkeleton from "./components/scroller/ScrollerSkeleton";
 function Content<T extends IScroller>({
   value,
   onChange,
@@ -28,7 +30,9 @@ function Content<T extends IScroller>({
           onChange={onChange}
           selector={selector}
         />
-        <Scroller data={result} isLoading={isLoading} />
+        <Suspense fallback={<ScrollerSkeleton />}>
+          <Scroller data={result} isLoading={isLoading} />
+        </Suspense>
       </div>
     </section>
   );
