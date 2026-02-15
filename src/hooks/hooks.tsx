@@ -97,3 +97,25 @@ export function useFetchPersonCombinedCredits(id?: string) {
     staleTime: 1000 * 60 * 30, // 30 min cache
   });
 }
+
+// fetch Tv series
+
+export const useFetchTvSeries = (type: string) => {
+  return useQuery<ITmdbResponse<IScroller>>({
+    queryKey: ["tvSeries", type],
+    queryFn: (): Promise<ITmdbResponse<IScroller>> =>
+      fetchFromTMDB(`/tv/${type}`, { language: "en-US", page: 1 }),
+  });
+};
+
+// fetch latest trailer
+export const useFetchLatestTrailer = () => {
+  return useQuery({
+    queryKey: ["latestTrailer"],
+    queryFn: () =>
+      fetchFromTMDB<ITmdbResponse<IScroller>>(`/movie/upcoming`, {
+        language: "en-US",
+      }),
+    staleTime: 1000 * 60 * 60, // 1 hour cache
+  });
+};

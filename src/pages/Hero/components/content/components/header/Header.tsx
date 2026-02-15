@@ -10,7 +10,7 @@ function Header({ title, selector, value, onChange }: IHeader) {
           <div
             key={index}
             onClick={() => onChange(item.value)}
-            className={`px-4 py-1 rounded-full cursor-pointer font-semibold transition duration-100 ${
+            className={`px-4 py-1 rounded-full cursor-pointer font-semibold transition duration-300 ${
               value === item.value
                 ? "bg-[var(--primary-color)] text-white "
                 : " "
