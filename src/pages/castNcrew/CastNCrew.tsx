@@ -6,8 +6,10 @@ import getTmdbImage from "@/utils/getTmdbImages";
 import { format } from "date-fns";
 import LoadingDialog from "@/components/loadingDialog/LoadingDialog";
 import type { IMovieDetails, ITvDetails } from "@/pages/detailedpage/type";
+import { useTheme } from "@/context/theme/ThemeContext";
 
 function CastNCrew() {
+  const { theme } = useTheme();
   const { type, id } = useParams<{ type: "movie" | "tv"; id: string }>();
   const navigate = useNavigate();
   const typeSafe: "movie" | "tv" =
@@ -34,7 +36,9 @@ function CastNCrew() {
   if (isLoading || isDetailsLoading)
     return <LoadingDialog open={isLoading || isDetailsLoading} />;
   return (
-    <div className="min-h-screen bg-white">
+    <div
+      className={`min-h-screen ${theme === "dark" ? "bg-gray-900" : "bg-white"}`}
+    >
       {/* Header */}
       <div className=" bg-linear-to-r from-black/80 to-black/40 text-white flex items-center">
         <div className="width-stack  mx-auto w-full  flex items-center gap-4">

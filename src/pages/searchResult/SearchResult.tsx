@@ -19,7 +19,7 @@ function SearchResult() {
   }
   console.log(data);
   return (
-    <div className="bg-gray-100">
+    <div className="">
       {/* EXACT CANVAS SIZE */}
       <div className="width-stack-xy">
         {/* LEFT OFFSET CONTAINER */}
