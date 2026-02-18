@@ -7,6 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useSearchParams } from "react-router-dom";
 
 function ResultPagination({
   query,
@@ -17,7 +18,10 @@ function ResultPagination({
   totalpages: number | undefined;
   activePage?: number | undefined;
 }) {
-  console.log(page);
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get("page");
+
+  console.log(currentPage);
   return (
     <div>
       <Pagination className="width-stack-xy">
@@ -28,18 +32,20 @@ function ResultPagination({
             />
           </PaginationItem>
           <PaginationItem>
-            {Array.from(
-              { length: Math.min(totalpages ?? 0, 10) },
-              (_, index) => (
+            {Array.from({ length: totalpages ?? 0 }, (_, index) => index)
+              .slice(
+                parseInt(currentPage ?? "1", 10) - 1,
+                parseInt(currentPage ?? "1", 10) + 9,
+              )
+              .map((pageIndex) => (
                 <PaginationLink
-                  key={index + 1}
-                  to={`/search?query=${query}&page=${index + 1}`}
-                  isActive={page === index + 1}
+                  key={pageIndex}
+                  to={`/search?query=${query}&page=${pageIndex + 1}`}
+                  isActive={page === pageIndex + 1}
                 >
-                  {index + 1}
+                  {pageIndex + 1}
                 </PaginationLink>
-              ),
-            )}
+              ))}
           </PaginationItem>
 
           {(totalpages ?? 0) > 10 && (
